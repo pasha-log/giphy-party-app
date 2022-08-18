@@ -23,8 +23,8 @@
 // AJAX with Axios
 // XMLHttpRequest is an old clunky, first request interface. Annoying syntax. 
 
-// To start a server on the teriminal, type $ python3 -m http.server
-// In the browser type in localhost8000
+// To start a server on the teriminal, type $ python3 -m http.server (works if you downloaded python3)
+// In the browser type in localhost:8000
 
 // Can easily include Axios using a CDN link: <script src="https://unpkg.com/axios/dist/axios.js"></script>   
 
@@ -41,12 +41,12 @@ console.log(response);
 // For now, all you need to know is that a promise is like a placeholder for a future value.
 // At the moment, we don't have the value, because axios.get() doesn't actually get it itself.
 // We want to wait for the promise to have that value before proceeding.
-// But we don't know when the promise wll receive its value!
+// But we don't know when the promise will receive its value!
 
 // Asynchronicity 
 // AJAX requests are asynchronous. Async and Await will be important.
-// - axios.get() completes before the reasponse is received
-// - This means that if we want to use the data we get we get back from our AJAX requests,
+// - axios.get() completes before the response is received
+// - This means that if we want to use the data we get back from our AJAX requests,
 // we need to wait until the response has been given to us.
 
 async function getData(){
@@ -68,15 +68,15 @@ async function getData(){
 
 // Multiple Requests
 async function getData(){
+    const response = await axios.get('https://swapi.co/api/planets/')
     const {next, results} = response.data;
     console.log(next); // a url should pop out
-    const response = await axios.get('https://swapi.co/api/planets/')
     for(let planet of results){
         console.log(planet.name)
     }
     const response2 = await axios.get(next) 
     const results2 = response2.data.results; 
-    for(let planet of results) {
+    for(let planet of results2) {
         console.log(planet.name)
     }
 }
